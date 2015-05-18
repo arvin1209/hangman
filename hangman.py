@@ -3,7 +3,7 @@
 __author__ = 'Anand'
 
 import random
-from os import system
+import os
 
 
 def readfile(filename) -> list:
@@ -158,7 +158,7 @@ def play() -> str:
 
         # Checking outcome (I) or (II) #
         else:
-            system('cls')
+            os.system('cls')
             guessed_chars.append(char_guess)
 
             # Checking outcome (II) #
@@ -188,7 +188,7 @@ def play() -> str:
 DICTIONARY = readfile('words.txt')
 
 while 'y' == input('\nDo you want to play again? (y / n)\n'):
-    system('cls')
+    os.system('cls')
     print(play())
 
 print('\nThanks for playing!\n')
