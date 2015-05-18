@@ -158,7 +158,7 @@ def play() -> str:
 
         # Checking outcome (I) or (II) #
         else:
-            os.system('cls')
+            os.system('cls' if os.name == 'nt' else 'clear')
             guessed_chars.append(char_guess)
 
             # Checking outcome (II) #
@@ -187,8 +187,11 @@ def play() -> str:
 # Game is initiated #
 DICTIONARY = readfile('words.txt')
 
+os.system('cls' if os.name == 'nt' else 'clear')
+print(play())
+
 while 'y' == input('\nDo you want to play again? (y / n)\n'):
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(play())
 
 print('\nThanks for playing!\n')
