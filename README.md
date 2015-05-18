@@ -3,4 +3,4 @@ A simple implementation of Hangman using CPython 3.4.3.
 
 #### How to play ###
 - Extract zip into a folder.
-- In terminal or command prompt, navigate into the folders directory and type: `python hangman.py`
+- In terminal or command prompt, navigate into the folder's directory and type: `python hangman.py`
