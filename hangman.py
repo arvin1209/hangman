@@ -150,11 +150,13 @@ def play() -> str:
     print('Guessed letters: ')
 
     while not won(hidden_word):
-        char_guess = input('Enter a guess: ')
+        char_guess = input('Enter a guess: ').lower()
 
         # Checking outcome (III) #
         if guessed_chars.__contains__(char_guess):
-            print('YOU ALREADY GUESSED THAT!\n')
+            print('You already guessed that.\n')
+        elif len(char_guess) > 1 or not (97 <= ord(char_guess) <= 122):
+            print('Illegal character. Please choose an alphabet character.')
 
         # Checking outcome (I) or (II) #
         else:
@@ -168,7 +170,7 @@ def play() -> str:
                 # Final state #
                 if bad_guesses == 8:
                     gallows(bad_guesses)
-                    return '\nGAME OVER! YOU LOST!\nThe word was: ' + word
+                    return '\nGame over. You lost.\nThe word was: ' + word
 
                 gallows(bad_guesses)
                 print('\n' + char_string(hidden_word) + '\n')
@@ -182,7 +184,7 @@ def play() -> str:
 
     # The while loop is active only when the game is not won, thus a win naturally results when #
     # we exit this loop. #
-    return '\nCONGRATS! YOU WIN!'
+    return '\nCongrats. You\'ve won.'
 
 # Game is initiated #
 DICTIONARY = readfile('words.txt')
