@@ -18,15 +18,17 @@ def readfile(filename) -> list:
     return lst
 
 
-def generator() -> str:
+def generator(word_list) -> str:
     """ Generates word to be used in hangman.
 
+    :type word_list: list
+    :param word_list: the dictionary of words to be used.
     :rtype : str
-    :return : a mystery word
+    :return : a mystery word.
     """
-    word = wordList[randint(0, 4440)]
+    word = word_list[randint(0, 4440)]
     while illegal(word):
-        word = wordList[randint(0, 4440)]
+        word = word_list[randint(0, 4440)]
     return word
 
 
@@ -35,8 +37,8 @@ def illegal(word) -> bool:
 
     :rtype : bool
     :param word: this word is checked for non-alphabetical characters.
-    :return: True if the word contains non-alphabetical characters, which in this case is only the '\'' character, and
-    False otherwise.
+    :return: True if the word contains non-alphabetical characters, which in this case is only the
+    '\'' character, and False otherwise.
     """
     if word.__contains__('\''):
         return True
@@ -45,14 +47,16 @@ def illegal(word) -> bool:
 
 
 def guess(char, char_list, word) -> list:
-    """ This method guesses a user-specified character and updates the list containing known and unknown characters of the
-    mystery word.
+    """ This method guesses a user-specified character and updates the list containing known and
+    unknown characters of the mystery word.
 
     :rtype : list
     :param char: the character guess.
-    :param char_list: the list containing known and unknown characters of the mystery word in the current game state.
+    :param char_list: the list containing known and unknown characters of the mystery word in the
+    current game state.
     :param word: the mystery word.
-    :return: a list containing known and unknown characters of the mystery word in the current game state.
+    :return: a list containing known and unknown characters of the mystery word in the current game
+    state.
     """
     for i in range(0, len(word)):
         if char_list[i] == '_':
@@ -62,10 +66,12 @@ def guess(char, char_list, word) -> list:
 
 
 def won(char_list) -> bool:
-    """ This method checks if the game has been won by checking if there are any unknown characters left.
+    """ This method checks if the game has been won by checking if there are any unknown characters
+    left.
 
     :rtype : bool
-    :param char_list: the list containing known and unknown characters of the mystery word in the current game state.
+    :param char_list: the list containing known and unknown characters of the mystery word in the
+    current game state.
     :return: True if the game has been won, and False otherwise.
     """
     if char_list.__contains__('_'):
@@ -75,10 +81,12 @@ def won(char_list) -> bool:
 
 
 def char_string(char_list) -> str:
-    """ This method returns a string representing the known and unknown characters in the current game state.
+    """ This method returns a string representing the known and unknown characters in the current
+    game state.
 
     :rtype : str
-    :param char_list: the list containing known and unknown characters of the mystery word in the current game state.
+    :param char_list: the list containing known and unknown characters of the mystery word in the
+    current game state.
     :return: a string representing the known and unknown characters in the current game state.
     """
     string = ''
@@ -98,36 +106,41 @@ def gallows(bad_guesses) -> None:
 
 
 def play() -> str:
-    """ This method simply employs the previously defined methods to play a game of Hangman. A word is first randomly
-    selected from the provided word list, after which it is hidden from the player and illustrated as a string of '_',
-    above which is an illustration of the gallows in the ground state. The game starts with the player making a guess,
-    which results in the following outcomes:
+    """ This method simply employs the previously defined methods to play a game of Hangman. A word
+    is first randomly selected from the provided word list, after which it is hidden from the
+    player and illustrated as a string of '_', above which is an illustration of the gallows in the
+    ground state. The game starts with the player making a guess, which results in the following
+    outcomes:
 
     I. The player makes a correct guess:
-        - The string of '_' representing the unknown characters is updated to reflect known characters. For example, if
-        our word is given as _ _ _ _ , and a guess of 'a' correctly identifies the second character of the mystery word,
-        then the unknown characters are updated to _ a _ _ . The guess is appended to a list containing unique previous
-        guesses to prevent the player from making the same guess later on in the game. If the player makes a guess that
-        pushes the game into a solved state, the player is congratulated, and the game ends. The illustration of the
-        gallows remains the same.
+        - The string of '_' representing the unknown characters is updated to reflect known
+        characters. For example, if our word is given as _ _ _ _ , and a guess of 'a' correctly
+        identifies the second character of the mystery word, then the unknown characters are
+        updated to _ a _ _ . The guess is appended to a list containing unique previous guesses to
+        prevent the player from making the same guess later on in the game. If the player makes a
+        guess that pushes the game into a solved state, the player is congratulated, and the game
+        ends. The illustration of the gallows remains the same.
 
     II. The player makes an incorrect guess:
-        - The guess is appended to a list containing unique previous guesses, as discussed in (I), and the gallows is
-        incremented to the next state. If the player makes a guess that pushes the game into the final state, the
-        illustration of the gallows is incremented to the final state, and the player is informed that he has lost,
-        and the game subsequently ends.
+        - The guess is appended to a list containing unique previous guesses, as discussed in (I),
+        and the gallows is incremented to the next state. If the player makes a guess that pushes
+        the game into the final state, the illustration of the gallows is incremented to the final
+        state, and the player is informed that he has lost, and the game subsequently ends.
 
     III. The player repeats a previous guess:
-        - The player is informed that he has already made the guess, and is then prompted to make another valid guess.
+        - The player is informed that he has already made the guess, and is then prompted to make
+        another valid guess.
 
     :rtype : str
-    :return: returns 'CONGRATS! YOU WIN!' if the game is won, and 'GAME OVER! YOU LOST!' if the game is lost.
+    :return: returns 'CONGRATS! YOU WIN!' if the game is won, and 'GAME OVER! YOU LOST!' if the
+    game is lost.
     """
     # Generating word and hidden string of '_' . #
-    word = generator()
+    word = generator(DICTIONARY)
     hidden_word = list('_' * len(word))
 
-    # The list and integer representing unique character guesses and the number of bad guesses respectively. #
+    # The list and integer representing unique character guesses and the number of bad guesses #
+    # respectively. #
     guessed_chars = []
     bad_guesses = 0
 
@@ -167,17 +180,15 @@ def play() -> str:
                 print('\n' + char_string(guess(char_guess, hidden_word, word)) + '\n')
                 print('Guessed letters: ' + char_string(guessed_chars))
 
-    # The while loop is active only when the game is not won, thus a win naturally results when we exit this loop. #
+    # The while loop is active only when the game is not won, thus a win naturally results when #
+    # we exit this loop. #
     return '\nCONGRATS! YOU WIN!'
 
 # Game is initiated #
-wordList = readfile('words.txt')
+DICTIONARY = readfile('words.txt')
 
-answer = 'y'
-while answer == 'y':
+while 'y' == input('\nDo you want to play again? (y / n)\n'):
     system('cls')
     print(play())
-
-    answer = input('\nDo you want to play again? (y / n)\n')
 
 print('\nThanks for playing!\n')
