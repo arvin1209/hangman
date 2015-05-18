@@ -101,7 +101,7 @@ def gallows(bad_guesses) -> None:
     :rtype : None
     :param bad_guesses: the number of bad guesses in the current game state.
     """
-    for line in readfile('state{0}.txt'.format(str(bad_guesses))):
+    for line in readfile('gallows/state{0}.txt'.format(str(bad_guesses))):
         print(line)
 
 
@@ -187,7 +187,7 @@ def play() -> str:
     return '\nCongrats. You\'ve won.'
 
 # Game is initiated #
-DICTIONARY = readfile('words.txt')
+DICTIONARY = readfile('gallows/words.txt')
 
 os.system('cls' if os.name == 'nt' else 'clear')
 print(play())
