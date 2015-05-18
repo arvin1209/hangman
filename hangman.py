@@ -2,7 +2,7 @@
 
 __author__ = 'Anand'
 
-from random import randint
+import random
 from os import system
 
 
@@ -26,9 +26,9 @@ def generator(word_list) -> str:
     :rtype : str
     :return : a mystery word.
     """
-    word = word_list[randint(0, 4440)]
+    word = random.choice(word_list)
     while illegal(word):
-        word = word_list[randint(0, 4440)]
+        word = random.choice(word_list)
     return word
 
 
