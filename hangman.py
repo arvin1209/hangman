@@ -101,8 +101,8 @@ def gallows(bad_guesses) -> None:
     :rtype : None
     :param bad_guesses: the number of bad guesses in the current game state.
     """
-    for line in readfile('gallows/state{0}.txt'.format(str(bad_guesses))):
-        print(line)
+    with open('gallows/state{0}.txt'.format(str(bad_guesses))) as file:
+        print(file.read())
 
 
 def play() -> str:
