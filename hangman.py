@@ -155,7 +155,7 @@ def play() -> str:
         # Checking outcome (III) #
         if guessed_chars.__contains__(char_guess):
             print('You already guessed that.\n')
-        elif len(char_guess) > 1 or not (97 <= ord(char_guess) <= 122):
+        elif len(char_guess) > 1 or not 97 <= ord(char_guess) <= 122:
             print('Illegal character. Please choose an alphabet character.')
 
         # Checking outcome (I) or (II) #
