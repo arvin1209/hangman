@@ -187,7 +187,7 @@ def play() -> str:
     return '\nCongrats. You\'ve won.'
 
 # Game is initiated #
-DICTIONARY = readfile('gallows/words.txt')
+DICTIONARY = readfile('words.txt')
 
 os.system('cls' if os.name == 'nt' else 'clear')
 print(play())
