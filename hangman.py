@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ This module defines methods to play a simple game of Hangman. """
 
 __author__ = 'Anand'
