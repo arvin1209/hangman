@@ -134,7 +134,7 @@ def play() -> str:
         another valid guess.
 
     :rtype : str
-    :return: returns 'CONGRATS! YOU WIN!' if the game is won, and 'GAME OVER! YOU LOST!' if the
+    :return: returns 'Congrats. You've won.' if the game is won, and 'Game over. You lost.' if the
     game is lost.
     """
     # Generating word and hidden string of '_' . #
