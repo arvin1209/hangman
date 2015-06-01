@@ -5,6 +5,7 @@ __author__ = 'Anand'
 
 import random
 import os
+import time
 
 
 def readfile(filename) -> list:
@@ -198,5 +199,6 @@ while 'y' == input('\nDo you want to play again? (y / n)\n'):
     print(play())
 
 print('\nThanks for playing!\n')
+time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
 
