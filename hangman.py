@@ -199,6 +199,6 @@ while 'y' == input('\nDo you want to play again? (y / n)\n'):
     print(play())
 
 print('\nThanks for playing!\n')
-time.sleep(2)
+time.sleep(1)
 os.system('cls' if os.name == 'nt' else 'clear')
 
