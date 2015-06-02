@@ -8,7 +8,7 @@ import os
 import time
 
 
-def readfile(filename) -> list:
+def readfile(filename): 
     """ Reads a dictionary file and returns a list of words.
 
     :rtype : list
@@ -20,7 +20,7 @@ def readfile(filename) -> list:
     return lst
 
 
-def generator(word_list) -> str:
+def generator(word_list): 
     """ Generates word to be used in hangman.
 
     :type word_list: list
@@ -34,7 +34,7 @@ def generator(word_list) -> str:
     return word
 
 
-def illegal(word) -> bool:
+def illegal(word): 
     """ This method checks if the parameter word contains non-alphabetical characters.
 
     :rtype : bool
@@ -48,7 +48,7 @@ def illegal(word) -> bool:
         return False
 
 
-def guess(char, char_list, word) -> list:
+def guess(char, char_list, word): 
     """ This method guesses a user-specified character and updates the list containing known and
     unknown characters of the mystery word.
 
@@ -67,7 +67,7 @@ def guess(char, char_list, word) -> list:
     return char_list
 
 
-def won(char_list) -> bool:
+def won(char_list): 
     """ This method checks if the game has been won by checking if there are any unknown characters
     left.
 
@@ -82,7 +82,7 @@ def won(char_list) -> bool:
         return True
 
 
-def char_string(char_list) -> str:
+def char_string(char_list): 
     """ This method returns a string representing the known and unknown characters in the current
     game state.
 
@@ -97,7 +97,7 @@ def char_string(char_list) -> str:
     return string
 
 
-def gallows(bad_guesses) -> None:
+def gallows(bad_guesses): 
     """ This method prints to the console an illustration of the gallows in the current game state.
 
     :rtype : None
@@ -107,7 +107,7 @@ def gallows(bad_guesses) -> None:
         print(file.read())
 
 
-def play() -> str:
+def play(): 
     """ This method simply employs the previously defined methods to play a game of Hangman. A word
     is first randomly selected from the provided word list, after which it is hidden from the
     player and illustrated as a string of '_', above which is an illustration of the gallows in the
