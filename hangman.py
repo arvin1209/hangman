@@ -1,33 +1,18 @@
 #!/usr/bin/env python3
 """ This module defines methods to play a simple game of Hangman. """
 
-__author__ = 'Anand'
-
 import random
 import os
 import time
 
 
 def readfile(filename):
-    """ Reads a dictionary file and returns a list of words.
-
-    :rtype : list
-    :param filename: the file that is read.
-    """
+    """ Reads a dictionary file and returns a list of words. """
     with open(filename) as file:
-        lst = file.readlines()
-    lst = [x.strip('\n') for x in lst]
-    return lst
-
+        return file.read().split()
 
 def generator(word_list):
-    """ Generates word to be used in hangman.
-
-    :type word_list: list
-    :param word_list: the dictionary of words to be used.
-    :rtype : str
-    :return : a mystery word.
-    """
+    """ Generates word to be used in hangman. """
     word = random.choice(word_list)
     while illegal(word):
         word = random.choice(word_list)
@@ -35,30 +20,13 @@ def generator(word_list):
 
 
 def illegal(word):
-    """ This method checks if the parameter word contains non-alphabetical characters.
-
-    :rtype : bool
-    :param word: this word is checked for non-alphabetical characters.
-    :return: True if the word contains non-alphabetical characters, which in this case is only the
-    '\'' character, and False otherwise.
-    """
-    if word.__contains__('\''):
-        return True
-    else:
-        return False
+    """ This method checks if the dictionary word contains non-alphabetical characters. """
+    return word.__contains__('\'')
 
 
 def guess(char, char_list, word):
     """ This method guesses a user-specified character and updates the list containing known and
     unknown characters of the mystery word.
-
-    :rtype : list
-    :param char: the character guess.
-    :param char_list: the list containing known and unknown characters of the mystery word in the
-    current game state.
-    :param word: the mystery word.
-    :return: a list containing known and unknown characters of the mystery word in the current game
-    state.
     """
     for i in range(0, len(word)):
         if char_list[i] == '_':
@@ -70,26 +38,13 @@ def guess(char, char_list, word):
 def won(char_list):
     """ This method checks if the game has been won by checking if there are any unknown characters
     left.
-
-    :rtype : bool
-    :param char_list: the list containing known and unknown characters of the mystery word in the
-    current game state.
-    :return: True if the game has been won, and False otherwise.
     """
-    if char_list.__contains__('_'):
-        return False
-    else:
-        return True
+    return not char_list.__contains__('_')
 
 
 def char_string(char_list):
     """ This method returns a string representing the known and unknown characters in the current
     game state.
-
-    :rtype : str
-    :param char_list: the list containing known and unknown characters of the mystery word in the
-    current game state.
-    :return: a string representing the known and unknown characters in the current game state.
     """
     string = ''
     for char in char_list:
@@ -99,12 +54,10 @@ def char_string(char_list):
 
 def gallows(bad_guesses):
     """ This method prints to the console an illustration of the gallows in the current game state.
-
-    :rtype : None
-    :param bad_guesses: the number of bad guesses in the current game state.
     """
     with open('gallows/state{0}.txt'.format(str(bad_guesses))) as file:
         print(file.read())
+        return None
 
 
 def play():
@@ -132,10 +85,6 @@ def play():
     III. The player repeats a previous guess:
         - The player is informed that he has already made the guess, and is then prompted to make
         another valid guess.
-
-    :rtype : str
-    :return: returns 'Congrats. You've won.' if the game is won, and 'Game over. You lost.' if the
-    game is lost.
     """
     # Generating word and hidden string of '_' . #
     word = generator(DICTIONARY)
@@ -172,7 +121,8 @@ def play():
                 # Final state #
                 if bad_guesses == 8:
                     gallows(bad_guesses)
-                    return '\nGame over. You lost.\nThe word was: ' + word
+                    print('\nGame over. You lost.\nThe word was: ' + word)
+                    return None
 
                 gallows(bad_guesses)
                 print('\n' + char_string(hidden_word) + '\n')
@@ -186,19 +136,20 @@ def play():
 
     # The while loop is active only when the game is not won, thus a win naturally results when #
     # we exit this loop. #
-    return '\nCongrats. You\'ve won.'
+    print('\nCongrats. You\'ve won.')
+    return None
 
-# Game is initiated #
+
+####################################### Game is initiated #########################################
 DICTIONARY = readfile('words.txt')
 
 os.system('cls' if os.name == 'nt' else 'clear')
-print(play())
+play()
 
 while 'y' == input('\nDo you want to play again? (y / n)\n'):
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(play())
+    play()
 
 print('\nThanks for playing!\n')
 time.sleep(1)
 os.system('cls' if os.name == 'nt' else 'clear')
-
