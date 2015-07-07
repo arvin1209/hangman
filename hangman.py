@@ -1,15 +1,17 @@
-#!/usr/bin/env python3
-""" This module defines methods to play a simple game of Hangman. """
+#!/usr/bin/python3
+""" This module defines methods to play a simple game of hangman. """
 
 import random
 import os
 import time
+from _Getch import getch
 
 
 def readfile(filename):
     """ Reads a dictionary file and returns a list of words. """
     with open(filename) as file:
         return file.read().split()
+
 
 def generator(word_list):
     """ Generates word to be used in hangman. """
@@ -101,7 +103,8 @@ def play():
     print('Guessed letters: ')
 
     while not won(hidden_word):
-        char_guess = input('Enter a guess: ').lower()
+        print('Enter a guess: ')
+        char_guess = getch().lower()
 
         # Checking outcome (III) #
         if guessed_chars.__contains__(char_guess):
@@ -146,9 +149,11 @@ DICTIONARY = readfile('words.txt')
 os.system('cls' if os.name == 'nt' else 'clear')
 play()
 
-while 'y' == input('\nDo you want to play again? (y / n)\n'):
+print('\nDo you want to play again? (y / n)\n')
+while 'y' == getch():
     os.system('cls' if os.name == 'nt' else 'clear')
     play()
+    print('\nDo you want to play again? (y / n)\n')
 
 print('\nThanks for playing!\n')
 time.sleep(1)
