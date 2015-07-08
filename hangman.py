@@ -147,14 +147,19 @@ def play():
 DICTIONARY = readfile('words.txt')
 
 os.system('cls' if os.name == 'nt' else 'clear')
+with open('intro.txt') as FILE:
+    print(FILE.read())
+    FILE.close()
+    time.sleep(2.5)
+    os.system('clear')
 play()
 
-print('\nDo you want to play again? (y / n)\n')
-while 'y' == getch():
+print('\nPress y to play again.\n')
+while getch() == 'y':
     os.system('cls' if os.name == 'nt' else 'clear')
     play()
-    print('\nDo you want to play again? (y / n)\n')
+    print('\nPress y to play again.\n')
 
 print('\nThanks for playing!\n')
-time.sleep(1)
+time.sleep(1.5)
 os.system('cls' if os.name == 'nt' else 'clear')
