@@ -151,7 +151,7 @@ with open('intro.txt') as FILE:
     print(FILE.read())
     FILE.close()
     time.sleep(2.5)
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
 play()
 
 print('\nPress y to play again.\n')
